@@ -1,0 +1,50 @@
+- MODELO DE EXECUÇÃO BASEADO NO CASO DE TESTE -
+
+1 - Primeiramente passagem dos arquivos para o SSH por meio do SCP
+
+scp -r pastaLocalDoProjeto pastaDestinoDoProjetoDiretoNoSSH
+
+Exemplo: 
+scp -r /home/nanda/Downloads/sdi0001-master/04-HelloRPC alu2020s2@ens1:/home/alu2020s2/nanda
+
+
+2 - Execução do programa:
+
+- TERMINAL 1 - Console na ens-1 - Acesse a pasta servidor -
+
+(APENAS SE QUISER DÊ UM make PARA COMPILAR O PROGRAMA NOVAMENTE. NESTE CASO, SE DEVE MOVER O ARQUIVO client DA PASTA SERVIDOR PARA A PASTA DOS OUTROS CLIENTES CONSEQUENTEMENTE)
+
+ens-1> ./server
+
+- TERMINAL 2 - Abrir outro terminal e acessar a ens-1 -
+            - Acessar a pasta john -
+
+ens-1> ./client localhost john
+
+- TERMINAL 3 - Abrir outro terminal e acessar a ens-1 -
+            - Acessar a pasta paul -
+
+ens-1> ./client localhost paul
+
+- TERMINAL 4 - Abrir outro terminal e acessar a ens-2 -
+            - Acessar a pasta mary -
+
+ens-2> ./client ens1 mary
+
+- TERMINAL 1 - Apertar 1 para enviar a mensagem que está escrita em chatjohn-01.chat -
+
+ens-1> 1
+
+--> O que irá acontecer: a mensagem que John enviou será recebida pelo servidor na pasta do servidor entitulada enviado_servido.serv
+
+- TERMINAL 3 e 4 - Apertar 2 para receber a mensagem enviada por John (arquivo john0.client0)
+
+--> O que irá acontecer: a mensagem que John enviou será retransmitida para os outros dois clientes conectados ao servidor (Paul e Mary)
+
+
+RESUMINDO:
+- A cada envio de mensagem por um cliente apertando 1, é necessário que os outros clientes recebam a mesma apertando 2. (A mensagem aparecerá na pasta)
+
+
+
+
